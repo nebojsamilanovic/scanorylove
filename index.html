@@ -27,14 +27,13 @@
       --gold: #8c6a4a;        
       --card: rgba(255, 252, 248, 0.7); 
       --shadow: 0 40px 80px rgba(33, 26, 20, 0.05);
-      --radius: 12px; /* Suptilno luksuzno zaobljenje */
+      --radius: 12px;
     }
 
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-    html, body { max-width: 100%; overflow-x: hidden; }
-    html { scroll-behavior: auto; background-color: var(--bg); }
+    html { scroll-behavior: auto; background-color: var(--bg); overflow-x: hidden; }
     body.is-loading { position: fixed; width: 100%; height: 100vh; overflow: hidden; }
-    body { margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; font-weight: 300; color: var(--text); background-color: var(--bg); background-image: radial-gradient(circle at top, #faf7f2 0%, var(--bg) 60%, var(--bg-2) 100%); -webkit-font-smoothing: antialiased; }
+    body { margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; font-weight: 300; color: var(--text); background-color: var(--bg); background-image: radial-gradient(circle at top, #faf7f2 0%, var(--bg) 60%, var(--bg-2) 100%); overflow-x: hidden; width: 100%; -webkit-font-smoothing: antialiased; }
     
     .ambient-glow { position: fixed; width: 600px; height: 600px; background: radial-gradient(circle, rgba(166,124,82,0.15) 0%, transparent 70%); top: -200px; left: -200px; pointer-events: none; z-index: 1; }
 
@@ -57,13 +56,13 @@
     .scroll-line::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 50%; background: var(--accent); animation: scrollDownAnim 2s infinite; }
     @keyframes scrollDownAnim { 0% { transform: translateY(-100%); } 100% { transform: translateY(200%); } }
 
-    /* Tvoja font familija */
     h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 400; margin: 0; letter-spacing: -0.01em; color: #15100c; }
     
-    .page { width: min(100%, 900px); margin: 0 auto; padding: 0 20px 100px; position: relative; z-index: 10; }
+    /* Kontejner bez unutrašnjih margina - omogućava savršen Full Bleed */
+    .page { width: min(100%, 900px); margin: 0 auto; padding: 0 0 100px; position: relative; z-index: 10; }
 
-    /* HERO & TICKER */
-    .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; }
+    /* HERO */
+    .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; padding: 0 24px; }
     .eyebrow { text-transform: uppercase; letter-spacing: 0.4em; font-size: 11px; color: var(--muted); margin-bottom: 35px; font-weight: 600; }
     h1 { font-size: clamp(65px, 16vw, 150px); line-height: 0.85; letter-spacing: -0.02em; color: #15100c; }
     .hero-message { max-width: 540px; margin: 45px auto 0; font-size: clamp(18px, 4.5vw, 24px); line-height: 1.6; color: #4a3422; font-family: 'Cormorant Garamond', serif; font-style: italic; }
@@ -73,10 +72,12 @@
     .ticker-num { font-family: 'Cormorant Garamond', serif; font-size: 32px; color: #15100c; line-height: 1; }
     .ticker-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--muted); margin-top: 5px; font-weight: 600; }
 
-    .section { padding: 90px 0; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: z-index 0.3s ease; position: relative; will-change: transform, opacity; width: 100%; }
+    /* Osnovne sekcije sa paddingom sa strana da element ne udara u ivicu */
+    .section { padding: 90px 24px; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: z-index 0.3s ease; position: relative; will-change: transform, opacity; width: 100%; }
     
     .card { background: var(--card); backdrop-filter: blur(35px); -webkit-backdrop-filter: blur(35px); border: 1px solid rgba(255, 255, 255, 0.6); border-radius: var(--radius); box-shadow: var(--shadow), inset 0 1px 3px rgba(255,255,255,0.8); width: 100%; overflow: hidden; }
     
+    /* PRVA SLIKA */
     .split { display: grid; grid-template-columns: 1fr 1.1fr; gap: 50px; align-items: center; width: 100%; }
     .photo-card { padding: 20px; transform: rotate(0deg); width: 100%; }
     .photo-card-inner { position: relative; width: 100%; height: 100%; }
@@ -84,15 +85,15 @@
     .image-wrapper img { width: 100%; height: 100%; object-fit: cover; }
     .caption { color: var(--muted); font-size: 12px; letter-spacing: 0.15em; padding: 20px 8px 4px; text-align: center; text-transform: uppercase; font-weight: 500; }
     
-    /* PLAVO ZVJEZDANO NEBO - Savršeno od ivice do ivice */
+    /* ==========================================
+       🌌 FULL-BLEED ZVJEZDANO NEBO
+       ========================================== */
     .star-map-fullscreen { 
         width: 100vw; 
-        position: relative;
-        left: 50%;
-        transform: translateX(-50%);
+        margin-left: calc(50% - 50vw);
         height: 100vh; 
         background: radial-gradient(ellipse at center, #1e3a8a 0%, #0c1a40 100%); 
-        color: #fff; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; box-shadow: inset 0 0 100px rgba(0,0,0,0.8); padding: 0 20px; 
+        color: #fff; display: flex; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; box-shadow: inset 0 0 100px rgba(0,0,0,0.8); padding: 0 20px; 
     }
     
     .stars-overlay { position: absolute; inset: 0; background: transparent; z-index: 1; overflow: hidden; }
@@ -116,10 +117,10 @@
     .coord-val { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: clamp(20px, 4vw, 32px); letter-spacing: 0.1em; margin-bottom: 15px; }
     .coord-desc { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 22px; color: #9a8a7a; }
 
-    /* TIMELINE (Optimizovano za max glatkoću) */
+    /* TIMELINE (Optimizovano za max glatkoću bez sjeckanja) */
     .timeline { position: relative; padding: 40px 0; max-width: 600px; margin: 0 auto; width: 100%; }
     .timeline::before { content: ''; position: absolute; left: 20px; top: 0; bottom: 0; width: 1px; background: rgba(133, 115, 99, 0.15); }
-    .timeline-progress { position: absolute; left: 20px; top: 0; width: 1px; background: var(--accent); height: 100%; transform-origin: top; transform: scaleY(0); will-change: transform; }
+    .timeline-progress { position: absolute; left: 20px; top: 0; width: 1px; background: var(--accent); height: 0; }
     .timeline-item { position: relative; padding-left: 55px; margin-bottom: 60px; opacity: 0; transform: translateY(30px); transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); will-change: transform, opacity;}
     .timeline-item:last-child { margin-bottom: 0; }
     .timeline-dot { position: absolute; left: 15px; top: 8px; width: 11px; height: 11px; background: var(--bg); border: 2px solid rgba(133, 115, 99, 0.4); border-radius: 50%; transition: all 0.5s ease; }
@@ -139,7 +140,7 @@
     .future-text { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: #4a3422; line-height: 1.4; font-style: italic; }
 
     /* FULLSCREEN TEXT BLOCK - Savršeno od ivice do ivice */
-    .text-block-fullscreen { width: 100vw; position: relative; left: 50%; transform: translateX(-50%); padding: 140px 24px; text-align: center; background: linear-gradient(to bottom, transparent, rgba(166,124,82,0.08), transparent); }
+    .text-block-fullscreen { width: 100vw; margin-left: calc(50% - 50vw); padding: 140px 24px; text-align: center; background: linear-gradient(to bottom, transparent, rgba(166,124,82,0.08), transparent); }
     .text-block-fullscreen h2 { margin-bottom: 28px; font-size: clamp(42px, 8.5vw, 78px); line-height: 1.05; color: #15100c; letter-spacing: -0.01em; }
     .text-block-fullscreen p { margin: 0 auto; max-width: 620px; font-size: clamp(17px, 4.5vw, 21px); line-height: 1.65; color: #4a3422; font-weight: 300; }
 
@@ -149,9 +150,8 @@
     .cinematic-gallery-container { 
         height: 1000vh;
         width: 100vw; 
-        position: relative;
-        left: 50%;
-        transform: translateX(-50%); 
+        margin-left: calc(50% - 50vw);
+        position: relative; 
         background: #1e1610; 
     }
     .gallery-sticky { position: sticky; top: 0; width: 100vw; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; }
@@ -262,17 +262,11 @@
     .cursor-blink { display: inline-block; width: 2px; height: 24px; background-color: #4a3422; margin-left: 5px; animation: blink 0.8s infinite; vertical-align: middle; }
     @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-    /* CSS FIX ZA FULL BLEED NA MOBILNIM (Nula bijelih ivica) */
-    @media (max-width: 900px) {
-        .star-map-fullscreen, .cinematic-gallery-container, .text-block-fullscreen {
-            width: calc(100% + 40px) !important;
-            margin-left: -20px !important;
-            left: auto !important;
-            transform: none !important;
-        }
-        .split { grid-template-columns: 1fr; gap: 40px; }
-        .flip-card { width: 100%; max-width: 280px; height: 200px; }
-        .section { padding: 60px 0; }
+    /* MOBILE ADJUSTMENTS */
+    @media (max-width: 768px) {
+      .split { grid-template-columns: 1fr; gap: 40px; }
+      .flip-card { width: 100%; max-width: 280px; height: 200px; }
+      .section { padding: 60px 24px; }
     }
   </style>
 </head>
@@ -388,7 +382,7 @@
       </div>
     </section>
 
-    <section class="section gs-reveal" style="padding: 0;">
+    <section class="section gs-reveal">
       <div class="card future-card">
           <div class="future-content">
               <div class="future-eyebrow">A Promise of Ordinary Days</div>
@@ -402,7 +396,7 @@
       </div>
     </section>
 
-    <section class="section">
+    <section class="section" style="padding: 0;">
       <div class="text-block-fullscreen gs-reveal">
         <h2>Every little thing became ours.</h2>
         <p>The walks, the jokes, the quiet moments, the photos we thought were ordinary... they became my favorite memories.</p>
@@ -490,7 +484,7 @@
       </div>
     </section>
 
-    <section class="section gs-reveal" style="padding: 0;">
+    <section class="section gs-reveal">
       <div class="card time-capsule-card">
         <div class="capsule-blur">
           <h2>A promise<br>to your future self.</h2>
@@ -593,12 +587,11 @@
 
     gsap.to(document.documentElement, { "--bg": "#ebd5c1", "--bg-2": "#d6c1b0", ease: "none", scrollTrigger: { trigger: ".time-capsule-card", start: "top 90%", end: "bottom bottom", scrub: true } });
 
-    // GSAP logika optimizovana za brzinu (scaleY i čiste klase)
     const timelineItems = document.querySelectorAll('.timeline-item');
-    timelineItems.forEach((item) => { 
+    timelineItems.forEach((item, index) => { 
         ScrollTrigger.create({ trigger: item, start: "top 85%", onEnter: () => item.classList.add('active'), onLeaveBack: () => item.classList.remove('active') }); 
     });
-    gsap.to("#tLine", { scaleY: 1, ease: "none", scrollTrigger: { trigger: "#loveTimeline", start: "top 70%", end: "bottom 70%", scrub: true } });
+    gsap.to("#tLine", { height: "100%", ease: "none", scrollTrigger: { trigger: "#loveTimeline", start: "top 70%", end: "bottom 70%", scrub: true } });
 
     const allGalleryImgs = gsap.utils.toArray('.gallery-img');
     if(allGalleryImgs.length > 0) {
@@ -612,8 +605,8 @@
             if(i === 0) {
                 galTl.to(img, { scale: 1.02, duration: 1, ease: "none" }, 0);
             } else {
-                galTl.to(allGalleryImgs[i-1], { opacity: 0, scale: 0.98, duration: 1, ease: "power2.inOut" }, i - 0.9);
-                galTl.to(img, { opacity: 1, scale: 1, duration: 1, ease: "power2.inOut" }, i - 0.9);
+                galTl.to(allGalleryImgs[i-1], { opacity: 0, scale: 0.98, duration: 1, ease: "power2.inOut" }, i - 0.7);
+                galTl.to(img, { opacity: 1, scale: 1, duration: 1, ease: "power2.inOut" }, i - 0.7);
                 if(i !== allGalleryImgs.length - 1) {
                     galTl.to(img, { scale: 1.02, duration: 1, ease: "none" }, i + 0.3);
                 }
