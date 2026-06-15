@@ -26,8 +26,8 @@
       --accent: #a67c52;      
       --gold: #8c6a4a;        
       --card: rgba(255, 252, 248, 0.7); 
-      --shadow: 0 40px 80px rgba(33, 26, 20, 0.05);
-      --radius: 12px; /* Suptilno luksuzno zaobljenje */
+      --shadow: 0 40px 80px rgba(33, 26, 20, 0.1);
+      --radius: 32px; /* Vraćeno na originalni luksuzni radijus */
     }
 
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -58,7 +58,9 @@
 
     /* Tvoja font familija */
     h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 400; margin: 0; letter-spacing: -0.01em; color: #15100c; }
-    .page { width: min(100%, 900px); margin: 0 auto; padding: 0 24px 100px; position: relative; z-index: 10; }
+    
+    /* Vraćeno centralno poravnanje za kontejner sajta */
+    .page { width: min(100%, 900px); margin: 0 auto; padding: 0 20px 100px; position: relative; z-index: 10; }
 
     /* HERO & TICKER */
     .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; }
@@ -67,43 +69,23 @@
     .hero-message { max-width: 540px; margin: 45px auto 0; font-size: clamp(18px, 4.5vw, 24px); line-height: 1.6; color: #4a3422; font-family: 'Cormorant Garamond', serif; font-style: italic; }
     
     .ticker-container { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 50px; }
-    .ticker-box { background: rgba(255,252,248,0.5); border: 1px solid rgba(166,124,82,0.3); border-radius: var(--radius); padding: 15px 20px; min-width: 80px; text-align: center; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: inset 0 1px 2px rgba(255,255,255,0.6), 0 10px 20px rgba(0,0,0,0.03); }
+    .ticker-box { background: rgba(255,252,248,0.5); border: 1px solid rgba(166,124,82,0.3); border-radius: 16px; padding: 15px 20px; min-width: 80px; text-align: center; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: inset 0 1px 2px rgba(255,255,255,0.6), 0 10px 20px rgba(0,0,0,0.03); }
     .ticker-num { font-family: 'Cormorant Garamond', serif; font-size: 32px; color: #15100c; line-height: 1; }
     .ticker-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--muted); margin-top: 5px; font-weight: 600; }
 
-    /* 👇 DODATO min-height: 100vh ZA PUNU VISINU SVAKE SEKCIJE 👇 */
-    .section { 
-        min-height: 100vh; 
-        width: 100%;
-        display: flex; 
-        flex-direction: column; 
-        justify-content: center; 
-        align-items: center; 
-        padding: 60px 0; 
-        transition: z-index 0.3s ease; 
-        position: relative; 
-        will-change: transform, opacity;
-    }
+    /* Vraćeno originalno rastojanje sekcija (mekani prelaz bez ogromnih 100vh praznina) */
+    .section { padding: 90px 0; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: z-index 0.3s ease; position: relative; will-change: transform, opacity; width: 100%; }
     
-    /* FULL-WIDTH LUXURY CARD STYLING */
-    .card { 
-      background: var(--card); 
-      backdrop-filter: blur(35px); 
-      -webkit-backdrop-filter: blur(35px); 
-      border-top: 1px solid rgba(255, 255, 255, 0.6); 
-      border-bottom: 1px solid rgba(255, 255, 255, 0.6); 
-      border-radius: 0; 
-      box-shadow: var(--shadow); 
-      width: 100vw; 
-      margin-left: calc(-50vw + 50%);
-      padding: 100px 24px;
-      overflow: hidden; 
-    }
+    /* Vraćen dizajn originalnih kartica (unutar kontejnera, bez razvlačenja) */
+    .card { background: var(--card); backdrop-filter: blur(35px); -webkit-backdrop-filter: blur(35px); border: 1px solid rgba(255, 255, 255, 0.6); border-radius: var(--radius); box-shadow: var(--shadow), inset 0 1px 3px rgba(255,255,255,0.8); width: 100%; overflow: hidden; }
     
-    /* PRVA SLIKA */
-    .split { display: grid; grid-template-columns: 1fr 1.1fr; gap: 50px; align-items: center; }
-    .image-wrapper { overflow: hidden; border-radius: var(--radius); aspect-ratio: 4 / 5; position: relative; box-shadow: 0 30px 60px rgba(0,0,0,0.1); width: 100%; }
+    /* PRVA SLIKA (Ravna, bez flip-a, unutar originalnog okvira) */
+    .split { display: grid; grid-template-columns: 1fr 1.1fr; gap: 50px; align-items: center; width: 100%; }
+    .photo-card { padding: 20px; transform: rotate(0deg); width: 100%; }
+    .photo-card-inner { position: relative; width: 100%; height: 100%; }
+    .image-wrapper { overflow: hidden; border-radius: 24px; aspect-ratio: 4 / 5; position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.06); }
     .image-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+    .caption { color: var(--muted); font-size: 12px; letter-spacing: 0.15em; padding: 20px 8px 4px; text-align: center; text-transform: uppercase; font-weight: 500; }
     
     /* PLAVO ZVJEZDANO NEBO */
     .star-map-fullscreen { 
@@ -127,16 +109,16 @@
     .star-map-content h2 { color: #eedfcc; margin-bottom: 18px; font-size: clamp(40px, 8vw, 80px); text-shadow: 0 10px 30px rgba(0,0,0,0.8); }
     .star-map-content p { color: rgba(255,255,255,0.7); font-size: 14px; letter-spacing: 0.25em; text-transform: uppercase; font-weight: 500; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
 
-    /* MINIMALIST COORDINATES - FULL WIDTH ČISTI PRIKAZ SA VRAĆENIM DIZAJNOM I BOJOM */
-    .coord-card { background: #110e0c; color: #eedfcc; padding: 100px 24px; text-align: center; position: relative; width: 100vw; margin-left: calc(-50vw + 50%); box-shadow: 0 30px 60px rgba(0,0,0,0.3); }
+    /* MINIMALIST COORDINATES Vraćeno unutar kontejnera */
+    .coord-card { background: #110e0c; color: #eedfcc; padding: 80px 40px; text-align: center; position: relative; width: 100%; border-radius: var(--radius); box-shadow: 0 30px 60px rgba(0,0,0,0.3), inset 0 1px 1px rgba(255,255,255,0.1); }
     .coord-card::before { content:''; position:absolute; inset:0; opacity:0.05; background-image: repeating-linear-gradient(0deg, transparent, transparent 19px, #eedfcc 20px), repeating-linear-gradient(90deg, transparent, transparent 19px, #eedfcc 20px); pointer-events: none;}
     .pin-icon { width: 40px; height: 40px; fill: var(--accent); margin-bottom: 20px; animation: float 3s ease-in-out infinite; filter: drop-shadow(0 10px 10px rgba(166, 124, 82, 0.4)); }
     @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-    .coord-val { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: clamp(24px, 5vw, 40px); letter-spacing: 0.1em; margin-bottom: 15px; }
+    .coord-val { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: clamp(20px, 4vw, 32px); letter-spacing: 0.1em; margin-bottom: 15px; }
     .coord-desc { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 22px; color: #9a8a7a; }
 
     /* TIMELINE */
-    .timeline { position: relative; padding: 40px 0; max-width: 600px; margin: 0 auto; width: 100%;}
+    .timeline { position: relative; padding: 40px 0; max-width: 600px; margin: 0 auto; width: 100%; }
     .timeline::before { content: ''; position: absolute; left: 20px; top: 0; bottom: 0; width: 1px; background: rgba(133, 115, 99, 0.15); }
     .timeline-progress { position: absolute; left: 20px; top: 0; width: 1px; background: var(--accent); height: 0; transition: height 0.1s linear; }
     .timeline-item { position: relative; padding-left: 55px; margin-bottom: 60px; opacity: 0; transform: translateY(30px); transition: all 0.5s ease;}
@@ -149,8 +131,9 @@
     .timeline-content { font-size: 16px; line-height: 1.6; color: #4a3422; margin: 0; }
 
     /* NOVI "FUTURE SNAPSHOT" ITEM SA premium formatiranjem */
-    .future-content { max-width: 600px; margin: 0 auto; }
-    .future-eyebrow { text-transform: uppercase; letter-spacing: 0.35em; font-size: 11px; color: var(--gold); margin-bottom: 15px; font-weight: 600; text-align: center;}
+    .future-card { padding: 60px 40px; text-align: center; }
+    .future-content { max-width: 500px; margin: 0 auto; }
+    .future-eyebrow { text-transform: uppercase; letter-spacing: 0.35em; font-size: 11px; color: var(--gold); margin-bottom: 15px; font-weight: 600;}
     .future-list { list-style: none; padding: 0; margin: 40px 0 0 0; text-align: left;}
     .future-item { display: flex; align-items: flex-start; margin-bottom: 25px; gap: 18px; }
     .future-dot { flex-shrink: 0; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); margin-top: 6px; box-shadow: 0 0 10px rgba(166,124,82,0.4); }
@@ -179,14 +162,14 @@
         max-width: 100%; 
         max-height: 100%; 
         object-fit: contain; 
-        border-radius: var(--radius); 
+        border-radius: 16px; 
         box-shadow: 0 25px 50px rgba(0,0,0,0.6);
     }
     
     .gallery-overlay { position: absolute; inset: 0; background: radial-gradient(circle, transparent 50%, rgba(30,22,16,0.8) 100%); z-index: 100; pointer-events: none;}
 
-    /* HOLD TO REVEAL - APSOLUTNO CENTRIRANO 90% WIDTH & TOUCH PAN DOZVOLJEN */
-    .hold-container { position: relative; width: 90vw; max-width: 600px; margin: 0; left: 50%; transform: translateX(-50%); aspect-ratio: 4/5; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); cursor: pointer; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; touch-action: pan-y; transition: box-shadow 0.6s ease; }
+    /* ZASEBNE SLIKE - Vraćeno na originalnu širinu, max 440px, i pan-y za skrolanje */
+    .hold-container { position: relative; width: 100%; max-width: 440px; margin: 0 auto; aspect-ratio: 4/5; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); cursor: pointer; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; touch-action: pan-y; transition: box-shadow 0.6s ease; }
     .hold-image { width: 100%; height: 100%; object-fit: cover; filter: blur(25px) grayscale(50%); transform: scale(1.1); transition: all 1.2s cubic-bezier(0.19, 1, 0.22, 1); pointer-events: none; }
     .hold-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; background: rgba(243, 234, 225, 0.3); transition: opacity 0.5s ease; pointer-events: none; }
     .finger-icon { font-size: 50px; animation: pulseFinger 2s infinite; margin-bottom: 15px; }
@@ -196,14 +179,14 @@
     .hold-container.active .hold-image { filter: blur(0px) grayscale(0%); transform: scale(1); }
     .hold-container.active .hold-overlay { opacity: 0; }
 
-    /* SCRATCH REVEAL - APSOLUTNO CENTRIRANO 90% WIDTH & TOUCH PAN DOZVOLJEN */
-    .scratch-container { position: relative; width: 90vw; max-width: 600px; margin: 0; left: 50%; transform: translateX(-50%); aspect-ratio: 4/5; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); touch-action: pan-y; }
+    /* SCRATCH REVEAL - Vraćeno na original, max 440px, i touch pan */
+    .scratch-container { position: relative; width: 100%; max-width: 440px; margin: 0 auto; aspect-ratio: 4/5; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); touch-action: pan-y; }
     .scratch-container img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
     #scratchCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; touch-action: pan-y; cursor: pointer; z-index: 5; }
     .scratch-hint { position: absolute; top: 30px; left: 0; width: 100%; text-align: center; color: #fff; font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; text-shadow: 0 4px 12px rgba(0,0,0,0.6); pointer-events: none; z-index: 10; font-weight: 500; transition: opacity 0.6s ease; }
 
-    /* DRAW HEART - APSOLUTNO CENTRIRANO 90% WIDTH & TOUCH PAN DOZVOLJEN */
-    .draw-heart-wrapper { position: relative; width: 90vw; max-width: 600px; margin: 0; left: 50%; transform: translateX(-50%); aspect-ratio: 4/5; border-radius: var(--radius); overflow: hidden; box-shadow: 0 40px 80px rgba(0,0,0,0.15); background: #15100c; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; touch-action: pan-y;}
+    /* DRAW HEART - Vraćeno na original, max 440px, i touch pan */
+    .draw-heart-wrapper { position: relative; width: 100%; max-width: 440px; margin: 0 auto; aspect-ratio: 4/5; border-radius: var(--radius); overflow: hidden; box-shadow: 0 40px 80px rgba(0,0,0,0.15); background: #15100c; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; touch-action: pan-y;}
     .dh-hint { position: absolute; top: 30px; left: 0; width: 100%; text-align: center; font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; z-index: 10; font-weight: 500; pointer-events: none; transition: opacity 0.5s ease; color: var(--gold); }
     #dhCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; touch-action: pan-y; z-index: 5; cursor: pointer; }
     .dh-reveal { position: absolute; inset: 0; z-index: 1; opacity: 0; transition: opacity 1.5s ease; }
@@ -217,23 +200,24 @@
     #focus-overlay { position: fixed; inset: 0; background: rgba(10, 15, 25, 0.8); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 90; opacity: 0; pointer-events: none; transition: opacity 0.6s ease; }
     body.focus-mode #focus-overlay { opacity: 1; pointer-events: auto; }
     
-    .flip-grid { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 30px; position: relative; z-index: 95; }
+    .flip-grid { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 30px; position: relative; z-index: 95; width: 100%; }
     .flip-card { background: transparent; width: 200px; height: 280px; perspective: 1000px; cursor: pointer; -webkit-tap-highlight-color: transparent; position: relative; z-index: 96; transition: z-index 0.3s;}
     .flip-card.flipped { z-index: 105; }
     .flip-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.8s cubic-bezier(0.4, 0.2, 0.2, 1); transform-style: preserve-3d; }
     .flip-card.flipped .flip-inner { transform: rotateY(180deg); }
-    .flip-front, .flip-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: var(--radius); display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; box-shadow: var(--shadow); }
+    .flip-front, .flip-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; box-shadow: var(--shadow); }
     .flip-front { background: var(--card); border: 1px solid rgba(255,255,255,0.6); backdrop-filter: blur(15px); }
     .flip-front .number { font-family: 'Cormorant Garamond', serif; font-size: 65px; color: #15100c; opacity: 0.8; }
     .flip-back { background: #15100c; color: #eedfcc; transform: rotateY(180deg); border: 1px solid rgba(166,124,82,0.4); }
     .flip-back p { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; line-height: 1.5; margin: 0; }
 
     /* HEART MUSIC CARD */
+    .music-card { padding: 100px 40px; text-align: center; position: relative; overflow: hidden; transition: all 0.5s ease; box-shadow: var(--shadow), inset 0 1px 3px rgba(255,255,255,0.8); }
     .heart-bg { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 440px; height: 440px; opacity: 0.05; z-index: 0; pointer-events: none; animation: heartbeat-bg 3s ease-in-out infinite; }
     .heart-bg svg { width: 100%; height: 100%; fill: var(--accent); }
     .heart-icon-top { width: 32px; height: 32px; margin: 0 auto 24px auto; fill: var(--accent); animation: heartbeat-bg 1.5s ease-in-out infinite; filter: drop-shadow(0 0 10px rgba(166,124,82,0.3)); }
     @keyframes heartbeat-bg { 0%, 100% { transform: scale(1); filter: drop-shadow(0 0 0px var(--accent)); } 50% { transform: scale(1.08); filter: drop-shadow(0 0 20px rgba(166,124,82,0.4)); } }
-    .music-card-content { position: relative; z-index: 2; text-align: center; max-width: 600px; margin: 0 auto;}
+    .music-card-content { position: relative; z-index: 2; }
     .btn-group { display: flex; flex-direction: column; gap: 20px; align-items: center; margin-top: 40px; width: 100%; }
     .play-button { appearance: none; border: 1px solid rgba(166,124,82,0.3); border-radius: 50px; background: rgba(255,255,255,0.5); color: var(--text); padding: 18px 36px; font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); width: 100%; max-width: 280px; display: flex; justify-content: center; align-items: center; gap: 12px; }
     .play-button:hover { background: #fff; box-shadow: 0 20px 40px rgba(0,0,0,0.06); transform: translateY(-3px); border-color: rgba(33,26,20,0.25); }
@@ -246,19 +230,19 @@
     @keyframes bounce { 0% { transform: scaleY(0.2); } 100% { transform: scaleY(1.1); } }
 
     /* TIME CAPSULE */
-    .time-capsule-card { position: relative; overflow: hidden; padding: 0 !important; background: transparent; border: none !important; }
+    .time-capsule-card { position: relative; overflow: hidden; padding: 0 !important; border: 1px solid rgba(166, 124, 82, 0.4) !important; background: rgba(255, 252, 248, 0.4); box-shadow: inset 0 1px 3px rgba(255,255,255,0.7); }
     .capsule-blur { filter: blur(30px); opacity: 0.4; pointer-events: none; user-select: none; padding: clamp(50px, 10vw, 90px); text-align: center; }
-    .lock-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: rgba(243, 234, 225, 0.4); z-index: 10; border-top: 1px solid rgba(166, 124, 82, 0.4); border-bottom: 1px solid rgba(166, 124, 82, 0.4);}
+    .lock-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: rgba(243, 234, 225, 0.4); z-index: 10; }
     .lock-icon { font-size: 48px; margin-bottom: 20px; animation: lockGlow 2.5s infinite ease-in-out; }
     @keyframes lockGlow { 0%, 100% { transform: scale(1); filter: drop-shadow(0 0 0px rgba(166, 124, 82, 0)); } 50% { transform: scale(1.08); filter: drop-shadow(0 0 25px rgba(166, 124, 82, 0.5)); } }
     .lock-text { font-family: 'Cormorant Garamond', serif; font-size: 28px; color: #15100c; font-weight: 500; }
     .lock-date { margin-top: 12px; font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: #4a3422; font-weight: 600;}
 
     /* FINAL SCREEN */
-    .final { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; }
+    .final { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; padding: 60px 0; }
     .final h2 { font-size: clamp(55px, 13vw, 115px); font-style: italic; line-height: 0.95; }
     .signature { margin-top: 60px; font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
-    .shake-hint { margin-top: 30px; font-size: 9px; letter-spacing: 0.15em; color: rgba(133, 115, 99, 0.5); cursor: pointer; text-transform: uppercase; padding: 10px; border: 1px solid rgba(133, 115, 99, 0.3); border-radius: var(--radius); transition: all 0.3s;}
+    .shake-hint { margin-top: 30px; font-size: 9px; letter-spacing: 0.15em; color: rgba(133, 115, 99, 0.5); cursor: pointer; text-transform: uppercase; padding: 10px; border: 1px solid rgba(133, 115, 99, 0.3); border-radius: 20px; transition: all 0.3s;}
     .shake-hint:hover { background: rgba(133, 115, 99, 0.1); }
 
     /* POP-UPS OVERLAYS */
@@ -278,11 +262,11 @@
     .cursor-blink { display: inline-block; width: 2px; height: 24px; background-color: #4a3422; margin-left: 5px; animation: blink 0.8s infinite; vertical-align: middle; }
     @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
+    /* MOBILE ADJUSTMENTS */
     @media (max-width: 768px) {
       .split { grid-template-columns: 1fr; gap: 40px; }
       .flip-card { width: 100%; max-width: 280px; height: 200px; }
-      .card { padding: 60px 24px; }
-      .coord-card { padding: 60px 24px; }
+      .section { padding: 60px 0; }
     }
   </style>
 </head>
@@ -329,8 +313,13 @@
     </section>
 
     <section class="section split" id="depthSection">
-      <div class="image-wrapper gs-reveal" id="zoomWrapper">
-         <img id="depthImage" src="https://images.unsplash.com/photo-1615966650071-855b15f29ad1?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bG92ZSUyMGNvdXBsZXxlbnwwfHwwfHx8MA%3D%3D" alt="Memory" loading="lazy" />
+      <div class="card photo-card gs-reveal">
+        <div class="photo-card-inner">
+             <div class="image-wrapper" id="zoomWrapper">
+               <img id="depthImage" src="https://images.unsplash.com/photo-1615966650071-855b15f29ad1?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bG92ZSUyMGNvdXBsZXxlbnwwfHwwfHx8MA%3D%3D" alt="Memory" loading="lazy" />
+             </div>
+        </div>
+        <div class="caption">Where it all began</div>
       </div>
       <div class="text-block gs-reveal">
         <h3 style="font-size:24px; margin-bottom:15px; color:var(--gold); font-style: italic;">You found it...</h3>
@@ -350,7 +339,7 @@
       </div>
     </section>
 
-    <section class="section gs-reveal" style="padding: 0;">
+    <section class="section gs-reveal">
       <div class="coord-card">
         <svg class="pin-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle>
@@ -394,7 +383,7 @@
       </div>
     </section>
 
-    <section class="section gs-reveal" style="padding: 0;">
+    <section class="section gs-reveal">
       <div class="card future-card">
           <div class="future-content">
               <div class="future-eyebrow">A Promise of Ordinary Days</div>
@@ -408,7 +397,7 @@
       </div>
     </section>
 
-    <section class="section" style="padding-top: 0;">
+    <section class="section">
       <div class="text-block-fullscreen gs-reveal">
         <h2>Every little thing became ours.</h2>
         <p>The walks, the jokes, the quiet moments, the photos we thought were ordinary... they became my favorite memories.</p>
@@ -472,7 +461,7 @@
       </div>
     </section>
 
-    <section class="section" style="padding: 0;">
+    <section class="section">
       <div class="card music-card gs-reveal">
         <div class="heart-bg"><svg viewBox="0 0 32 29.6"><path d="M23.6,0c-3.4,0-6.3,2.7-7.6,5.6C14.7,2.7,11.8,0,8.4,0C3.8,0,0,3.8,0,8.4c0,9.4,9.5,11.9,16,21.2c6.1-9.3,16-12.1,16-21.2C32,3.8,28.2,0,23.6,0z"/></svg></div>
         <div class="music-card-content">
@@ -496,7 +485,7 @@
       </div>
     </section>
 
-    <section class="section gs-reveal" style="padding: 0;">
+    <section class="section gs-reveal">
       <div class="card time-capsule-card">
         <div class="capsule-blur">
           <h2>A promise<br>to your future self.</h2>
@@ -703,7 +692,7 @@
     let isDrawingHeart = false; let distanceDrawn = 0; let lastDhX, lastDhY;
     let dhInitialized = false;
     function initDhCanvas() {
-        if(dhInitialized && window.innerWidth < 768) return; // Sprječava resetovanje na mobilnom pri skrolanju
+        if(dhInitialized && window.innerWidth < 768) return; 
         dhCanvas.width = dhCanvas.parentElement.offsetWidth; dhCanvas.height = dhCanvas.parentElement.offsetHeight;
         dhCtx.lineCap = 'round'; dhCtx.lineJoin = 'round'; dhCtx.lineWidth = 15; dhCtx.strokeStyle = 'rgba(212, 175, 55, 0.8)'; dhCtx.shadowBlur = 10; dhCtx.shadowColor = '#d4af37';
         dhInitialized = true;
@@ -731,7 +720,7 @@
     let isDrawing = false;
     let scratchInitialized = false;
     function initCanvas() { 
-        if(scratchInitialized && window.innerWidth < 768) return; // Sprječava resetovanje na mobilnom pri skrolanju
+        if(scratchInitialized && window.innerWidth < 768) return; 
         canvas.width = canvas.parentElement.offsetWidth; canvas.height = canvas.parentElement.offsetHeight; ctx.fillStyle = '#cfbca2'; ctx.fillRect(0, 0, canvas.width, canvas.height); ctx.fillStyle = '#bda88d'; for(let i=0; i<200; i++){ ctx.fillRect(Math.random()*canvas.width, Math.random()*canvas.height, 1.5, 1.5); } 
         scratchInitialized = true;
     }
