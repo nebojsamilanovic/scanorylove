@@ -26,8 +26,8 @@
       --accent: #a67c52;      
       --gold: #8c6a4a;        
       --card: rgba(255, 252, 248, 0.7); 
-      --shadow: 0 40px 80px rgba(33, 26, 20, 0.1);
-      --radius: 32px; /* Vraćeno na originalni luksuzni radijus */
+      --shadow: 0 40px 80px rgba(33, 26, 20, 0.05);
+      --radius: 12px; /* Suptilno luksuzno zaobljenje */
     }
 
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -69,11 +69,11 @@
     .hero-message { max-width: 540px; margin: 45px auto 0; font-size: clamp(18px, 4.5vw, 24px); line-height: 1.6; color: #4a3422; font-family: 'Cormorant Garamond', serif; font-style: italic; }
     
     .ticker-container { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 50px; }
-    .ticker-box { background: rgba(255,252,248,0.5); border: 1px solid rgba(166,124,82,0.3); border-radius: 16px; padding: 15px 20px; min-width: 80px; text-align: center; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: inset 0 1px 2px rgba(255,255,255,0.6), 0 10px 20px rgba(0,0,0,0.03); }
+    .ticker-box { background: rgba(255,252,248,0.5); border: 1px solid rgba(166,124,82,0.3); border-radius: var(--radius); padding: 15px 20px; min-width: 80px; text-align: center; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: inset 0 1px 2px rgba(255,255,255,0.6), 0 10px 20px rgba(0,0,0,0.03); }
     .ticker-num { font-family: 'Cormorant Garamond', serif; font-size: 32px; color: #15100c; line-height: 1; }
     .ticker-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--muted); margin-top: 5px; font-weight: 600; }
 
-    /* Vraćeno originalno rastojanje sekcija (mekani prelaz bez ogromnih 100vh praznina) */
+    /* Vraćeno originalno rastojanje sekcija (mekani prelaz) */
     .section { padding: 90px 0; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: z-index 0.3s ease; position: relative; will-change: transform, opacity; width: 100%; }
     
     /* Vraćen dizajn originalnih kartica (unutar kontejnera, bez razvlačenja) */
@@ -168,7 +168,7 @@
     
     .gallery-overlay { position: absolute; inset: 0; background: radial-gradient(circle, transparent 50%, rgba(30,22,16,0.8) 100%); z-index: 100; pointer-events: none;}
 
-    /* ZASEBNE SLIKE - Vraćeno na originalnu širinu, max 440px, i pan-y za skrolanje */
+    /* ZASEBNE SLIKE - Max 440px */
     .hold-container { position: relative; width: 100%; max-width: 440px; margin: 0 auto; aspect-ratio: 4/5; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); cursor: pointer; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; touch-action: pan-y; transition: box-shadow 0.6s ease; }
     .hold-image { width: 100%; height: 100%; object-fit: cover; filter: blur(25px) grayscale(50%); transform: scale(1.1); transition: all 1.2s cubic-bezier(0.19, 1, 0.22, 1); pointer-events: none; }
     .hold-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; background: rgba(243, 234, 225, 0.3); transition: opacity 0.5s ease; pointer-events: none; }
@@ -179,16 +179,16 @@
     .hold-container.active .hold-image { filter: blur(0px) grayscale(0%); transform: scale(1); }
     .hold-container.active .hold-overlay { opacity: 0; }
 
-    /* SCRATCH REVEAL - Vraćeno na original, max 440px, i touch pan */
-    .scratch-container { position: relative; width: 100%; max-width: 440px; margin: 0 auto; aspect-ratio: 4/5; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); touch-action: pan-y; }
+    /* SCRATCH REVEAL - ZAKLJUČANO SKROLANJE SAMO NA NJOJ (touch-action: none) */
+    .scratch-container { position: relative; width: 100%; max-width: 440px; margin: 0 auto; aspect-ratio: 4/5; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); touch-action: none; }
     .scratch-container img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
-    #scratchCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; touch-action: pan-y; cursor: pointer; z-index: 5; }
+    #scratchCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; touch-action: none; cursor: pointer; z-index: 5; }
     .scratch-hint { position: absolute; top: 30px; left: 0; width: 100%; text-align: center; color: #fff; font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; text-shadow: 0 4px 12px rgba(0,0,0,0.6); pointer-events: none; z-index: 10; font-weight: 500; transition: opacity 0.6s ease; }
 
-    /* DRAW HEART - Vraćeno na original, max 440px, i touch pan */
-    .draw-heart-wrapper { position: relative; width: 100%; max-width: 440px; margin: 0 auto; aspect-ratio: 4/5; border-radius: var(--radius); overflow: hidden; box-shadow: 0 40px 80px rgba(0,0,0,0.15); background: #15100c; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; touch-action: pan-y;}
+    /* DRAW HEART - ZAKLJUČANO SKROLANJE SAMO NA NJOJ (touch-action: none) */
+    .draw-heart-wrapper { position: relative; width: 100%; max-width: 440px; margin: 0 auto; aspect-ratio: 4/5; border-radius: var(--radius); overflow: hidden; box-shadow: 0 40px 80px rgba(0,0,0,0.15); background: #15100c; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; touch-action: none;}
     .dh-hint { position: absolute; top: 30px; left: 0; width: 100%; text-align: center; font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; z-index: 10; font-weight: 500; pointer-events: none; transition: opacity 0.5s ease; color: var(--gold); }
-    #dhCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; touch-action: pan-y; z-index: 5; cursor: pointer; }
+    #dhCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; touch-action: none; z-index: 5; cursor: pointer; }
     .dh-reveal { position: absolute; inset: 0; z-index: 1; opacity: 0; transition: opacity 1.5s ease; }
     .dh-reveal img { width: 100%; height: 100%; object-fit: cover; }
     .dh-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 150px; height: 150px; opacity: 0.2; pointer-events: none; }
@@ -312,6 +312,7 @@
       </div>
     </section>
 
+    <!-- Originalni izgled prve sekcije, sa ravnom slikom bez klika -->
     <section class="section split" id="depthSection">
       <div class="card photo-card gs-reveal">
         <div class="photo-card-inner">
@@ -383,7 +384,7 @@
       </div>
     </section>
 
-    <section class="section gs-reveal">
+    <section class="section gs-reveal" style="padding: 0;">
       <div class="card future-card">
           <div class="future-content">
               <div class="future-eyebrow">A Promise of Ordinary Days</div>
@@ -709,9 +710,17 @@
         lastDhX = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left; lastDhY = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top; dhCtx.beginPath(); dhCtx.moveTo(lastDhX, lastDhY);
     }
     function stopDh() { isDrawingHeart = false; lastDhX = undefined; }
-    dhCanvas.addEventListener('mousedown', startDh); dhCanvas.addEventListener('mousemove', (e) => { if(!isDrawingHeart) return; const rect = dhCanvas.getBoundingClientRect(); drawPath(e.clientX - rect.left, e.clientY - rect.top); });
-    dhCanvas.addEventListener('mouseup', stopDh); dhCanvas.addEventListener('mouseleave', stopDh);
-    dhCanvas.addEventListener('touchstart', startDh, {passive: true}); dhCanvas.addEventListener('touchmove', (e) => { if(!isDrawingHeart) return; const rect = dhCanvas.getBoundingClientRect(); drawPath(e.touches[0].clientX - rect.left, e.touches[0].clientY - rect.top); }, {passive: true});
+    dhCanvas.addEventListener('mousedown', startDh); 
+    dhCanvas.addEventListener('mousemove', (e) => { if(!isDrawingHeart) return; const rect = dhCanvas.getBoundingClientRect(); drawPath(e.clientX - rect.left, e.clientY - rect.top); });
+    dhCanvas.addEventListener('mouseup', stopDh); 
+    dhCanvas.addEventListener('mouseleave', stopDh);
+    // Isključeno defaultno skrolanje OVDJE, da se ekran ne bi mrdao prilikom crtanja
+    dhCanvas.addEventListener('touchstart', (e) => { if(e.cancelable) e.preventDefault(); startDh(e); }, {passive: false}); 
+    dhCanvas.addEventListener('touchmove', (e) => { 
+        if(!isDrawingHeart) return; 
+        if(e.cancelable) e.preventDefault(); 
+        const rect = dhCanvas.getBoundingClientRect(); drawPath(e.touches[0].clientX - rect.left, e.touches[0].clientY - rect.top); 
+    }, {passive: false});
     dhCanvas.addEventListener('touchend', stopDh);
 
     gsap.fromTo("#depthImage", { scale: 1.7 }, { scale: 1, ease: "none", scrollTrigger: { trigger: "#depthSection", start: "top bottom", end: "center center", scrub: true } });
@@ -726,7 +735,16 @@
     }
     setTimeout(initCanvas, 600); window.addEventListener('resize', initCanvas);
     function scratch(e) { if (!isDrawing) return; hint.style.opacity = 0; const rect = canvas.getBoundingClientRect(); let x, y; if (e.type.includes('touch')) { x = e.touches[0].clientX - rect.left; y = e.touches[0].clientY - rect.top; } else { x = e.clientX - rect.left; y = e.clientY - rect.top; } ctx.globalCompositeOperation = 'destination-out'; ctx.beginPath(); ctx.arc(x, y, 40, 0, Math.PI * 2); ctx.fill(); }
-    canvas.addEventListener('mousedown', () => isDrawing = true); canvas.addEventListener('mouseup', () => isDrawing = false); canvas.addEventListener('mousemove', scratch); canvas.addEventListener('touchstart', (e) => { isDrawing = true; scratch(e); }, {passive: true}); canvas.addEventListener('touchend', () => isDrawing = false); canvas.addEventListener('touchmove', scratch, {passive: true});
+    canvas.addEventListener('mousedown', () => isDrawing = true); 
+    canvas.addEventListener('mouseup', () => isDrawing = false); 
+    canvas.addEventListener('mousemove', scratch); 
+    // Isključeno defaultno skrolanje OVDJE, da se ekran ne bi mrdao prilikom brisanja prašine
+    canvas.addEventListener('touchstart', (e) => { if(e.cancelable) e.preventDefault(); isDrawing = true; scratch(e); }, {passive: false}); 
+    canvas.addEventListener('touchmove', (e) => { 
+        if(isDrawing && e.cancelable) e.preventDefault();
+        scratch(e); 
+    }, {passive: false});
+    canvas.addEventListener('touchend', () => isDrawing = false); 
 
     const flipCards = document.querySelectorAll('.flip-card');
     const focusOverlay = document.getElementById('focus-overlay');
