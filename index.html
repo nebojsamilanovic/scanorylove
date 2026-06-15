@@ -71,7 +71,19 @@
     .ticker-num { font-family: 'Cormorant Garamond', serif; font-size: 32px; color: #15100c; line-height: 1; }
     .ticker-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--muted); margin-top: 5px; font-weight: 600; }
 
-    .section { padding: 100px 0; display: grid; align-items: center; transition: z-index 0.3s ease; position: relative; will-change: transform, opacity;}
+    /* 👇 DODATO min-height: 100vh ZA PUNU VISINU SVAKE SEKCIJE 👇 */
+    .section { 
+        min-height: 100vh; 
+        width: 100%;
+        display: flex; 
+        flex-direction: column; 
+        justify-content: center; 
+        align-items: center; 
+        padding: 60px 0; 
+        transition: z-index 0.3s ease; 
+        position: relative; 
+        will-change: transform, opacity;
+    }
     
     /* FULL-WIDTH LUXURY CARD STYLING */
     .card { 
@@ -124,7 +136,7 @@
     .coord-desc { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 22px; color: #9a8a7a; }
 
     /* TIMELINE */
-    .timeline { position: relative; padding: 40px 0; max-width: 600px; margin: 0 auto; }
+    .timeline { position: relative; padding: 40px 0; max-width: 600px; margin: 0 auto; width: 100%;}
     .timeline::before { content: ''; position: absolute; left: 20px; top: 0; bottom: 0; width: 1px; background: rgba(133, 115, 99, 0.15); }
     .timeline-progress { position: absolute; left: 20px; top: 0; width: 1px; background: var(--accent); height: 0; transition: height 0.1s linear; }
     .timeline-item { position: relative; padding-left: 55px; margin-bottom: 60px; opacity: 0; transform: translateY(30px); transition: all 0.5s ease;}
@@ -173,7 +185,7 @@
     
     .gallery-overlay { position: absolute; inset: 0; background: radial-gradient(circle, transparent 50%, rgba(30,22,16,0.8) 100%); z-index: 100; pointer-events: none;}
 
-    /* HOLD TO REVEAL - APSOLUTNO CENTRIRANO 90% WIDTH */
+    /* HOLD TO REVEAL - APSOLUTNO CENTRIRANO 90% WIDTH & TOUCH PAN DOZVOLJEN */
     .hold-container { position: relative; width: 90vw; max-width: 600px; margin: 0; left: 50%; transform: translateX(-50%); aspect-ratio: 4/5; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); cursor: pointer; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; touch-action: pan-y; transition: box-shadow 0.6s ease; }
     .hold-image { width: 100%; height: 100%; object-fit: cover; filter: blur(25px) grayscale(50%); transform: scale(1.1); transition: all 1.2s cubic-bezier(0.19, 1, 0.22, 1); pointer-events: none; }
     .hold-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; align-items: center; background: rgba(243, 234, 225, 0.3); transition: opacity 0.5s ease; pointer-events: none; }
@@ -184,16 +196,16 @@
     .hold-container.active .hold-image { filter: blur(0px) grayscale(0%); transform: scale(1); }
     .hold-container.active .hold-overlay { opacity: 0; }
 
-    /* SCRATCH REVEAL - APSOLUTNO CENTRIRANO 90% WIDTH */
+    /* SCRATCH REVEAL - APSOLUTNO CENTRIRANO 90% WIDTH & TOUCH PAN DOZVOLJEN */
     .scratch-container { position: relative; width: 90vw; max-width: 600px; margin: 0; left: 50%; transform: translateX(-50%); aspect-ratio: 4/5; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); touch-action: pan-y; }
-    .scratch-container img { width: 100%; height: 100%; object-fit: cover; }
-    #scratchCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; touch-action: none; cursor: pointer; z-index: 5; }
+    .scratch-container img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+    #scratchCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; touch-action: pan-y; cursor: pointer; z-index: 5; }
     .scratch-hint { position: absolute; top: 30px; left: 0; width: 100%; text-align: center; color: #fff; font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; text-shadow: 0 4px 12px rgba(0,0,0,0.6); pointer-events: none; z-index: 10; font-weight: 500; transition: opacity 0.6s ease; }
 
-    /* DRAW HEART - APSOLUTNO CENTRIRANO 90% WIDTH */
-    .draw-heart-wrapper { position: relative; width: 90vw; max-width: 600px; margin: 0; left: 50%; transform: translateX(-50%); aspect-ratio: 4/5; border-radius: var(--radius); overflow: hidden; box-shadow: 0 40px 80px rgba(0,0,0,0.15); background: #15100c; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; touch-action: none;}
+    /* DRAW HEART - APSOLUTNO CENTRIRANO 90% WIDTH & TOUCH PAN DOZVOLJEN */
+    .draw-heart-wrapper { position: relative; width: 90vw; max-width: 600px; margin: 0; left: 50%; transform: translateX(-50%); aspect-ratio: 4/5; border-radius: var(--radius); overflow: hidden; box-shadow: 0 40px 80px rgba(0,0,0,0.15); background: #15100c; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; touch-action: pan-y;}
     .dh-hint { position: absolute; top: 30px; left: 0; width: 100%; text-align: center; font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; z-index: 10; font-weight: 500; pointer-events: none; transition: opacity 0.5s ease; color: var(--gold); }
-    #dhCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 5; cursor: pointer; }
+    #dhCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; touch-action: pan-y; z-index: 5; cursor: pointer; }
     .dh-reveal { position: absolute; inset: 0; z-index: 1; opacity: 0; transition: opacity 1.5s ease; }
     .dh-reveal img { width: 100%; height: 100%; object-fit: cover; }
     .dh-icon { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 150px; height: 150px; opacity: 0.2; pointer-events: none; }
@@ -669,7 +681,6 @@
     const holdContainer = document.getElementById('holdContainer');
     let heartbeatInterval;
     function startHold(e) { 
-        if(e) e.preventDefault(); 
         holdContainer.classList.add('active'); 
         if(navigator.vibrate) {
            navigator.vibrate([50, 100, 50]); 
@@ -680,13 +691,22 @@
         holdContainer.classList.remove('active'); 
         clearInterval(heartbeatInterval);
     }
-    holdContainer.addEventListener('contextmenu', e => e.preventDefault()); holdContainer.addEventListener('mousedown', startHold); holdContainer.addEventListener('mouseup', endHold); holdContainer.addEventListener('mouseleave', endHold); holdContainer.addEventListener('touchstart', startHold, {passive: false}); holdContainer.addEventListener('touchend', endHold); holdContainer.addEventListener('touchcancel', endHold);
+    holdContainer.addEventListener('contextmenu', e => e.preventDefault()); 
+    holdContainer.addEventListener('mousedown', startHold); 
+    holdContainer.addEventListener('mouseup', endHold); 
+    holdContainer.addEventListener('mouseleave', endHold); 
+    holdContainer.addEventListener('touchstart', startHold, {passive: true}); 
+    holdContainer.addEventListener('touchend', endHold); 
+    holdContainer.addEventListener('touchcancel', endHold);
 
     const dhCanvas = document.getElementById('dhCanvas'); const dhCtx = dhCanvas.getContext('2d'); const dhWrapper = document.getElementById('dhWrapper'); const dhHint = document.getElementById('dhHintText');
     let isDrawingHeart = false; let distanceDrawn = 0; let lastDhX, lastDhY;
+    let dhInitialized = false;
     function initDhCanvas() {
+        if(dhInitialized && window.innerWidth < 768) return; // Sprječava resetovanje na mobilnom pri skrolanju
         dhCanvas.width = dhCanvas.parentElement.offsetWidth; dhCanvas.height = dhCanvas.parentElement.offsetHeight;
         dhCtx.lineCap = 'round'; dhCtx.lineJoin = 'round'; dhCtx.lineWidth = 15; dhCtx.strokeStyle = 'rgba(212, 175, 55, 0.8)'; dhCtx.shadowBlur = 10; dhCtx.shadowColor = '#d4af37';
+        dhInitialized = true;
     }
     setTimeout(initDhCanvas, 600); window.addEventListener('resize', initDhCanvas);
     function drawPath(x, y) {
@@ -696,23 +716,28 @@
         if(distanceDrawn > 1000 && !dhWrapper.classList.contains('unlocked')) { dhWrapper.classList.add('unlocked'); fireConfetti(); }
     }
     function startDh(e) { 
-        if(e) e.preventDefault(); isDrawingHeart = true; const rect = dhCanvas.getBoundingClientRect();
+        isDrawingHeart = true; const rect = dhCanvas.getBoundingClientRect();
         lastDhX = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left; lastDhY = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top; dhCtx.beginPath(); dhCtx.moveTo(lastDhX, lastDhY);
     }
     function stopDh() { isDrawingHeart = false; lastDhX = undefined; }
     dhCanvas.addEventListener('mousedown', startDh); dhCanvas.addEventListener('mousemove', (e) => { if(!isDrawingHeart) return; const rect = dhCanvas.getBoundingClientRect(); drawPath(e.clientX - rect.left, e.clientY - rect.top); });
     dhCanvas.addEventListener('mouseup', stopDh); dhCanvas.addEventListener('mouseleave', stopDh);
-    dhCanvas.addEventListener('touchstart', startDh, {passive: false}); dhCanvas.addEventListener('touchmove', (e) => { if(!isDrawingHeart) return; const rect = dhCanvas.getBoundingClientRect(); drawPath(e.touches[0].clientX - rect.left, e.touches[0].clientY - rect.top); }, {passive: false});
+    dhCanvas.addEventListener('touchstart', startDh, {passive: true}); dhCanvas.addEventListener('touchmove', (e) => { if(!isDrawingHeart) return; const rect = dhCanvas.getBoundingClientRect(); drawPath(e.touches[0].clientX - rect.left, e.touches[0].clientY - rect.top); }, {passive: true});
     dhCanvas.addEventListener('touchend', stopDh);
 
     gsap.fromTo("#depthImage", { scale: 1.7 }, { scale: 1, ease: "none", scrollTrigger: { trigger: "#depthSection", start: "top bottom", end: "center center", scrub: true } });
 
     const canvas = document.getElementById('scratchCanvas'); const ctx = canvas.getContext('2d'); const hint = document.getElementById('scratchHint');
     let isDrawing = false;
-    function initCanvas() { canvas.width = canvas.parentElement.offsetWidth; canvas.height = canvas.parentElement.offsetHeight; ctx.fillStyle = '#cfbca2'; ctx.fillRect(0, 0, canvas.width, canvas.height); ctx.fillStyle = '#bda88d'; for(let i=0; i<200; i++){ ctx.fillRect(Math.random()*canvas.width, Math.random()*canvas.height, 1.5, 1.5); } }
+    let scratchInitialized = false;
+    function initCanvas() { 
+        if(scratchInitialized && window.innerWidth < 768) return; // Sprječava resetovanje na mobilnom pri skrolanju
+        canvas.width = canvas.parentElement.offsetWidth; canvas.height = canvas.parentElement.offsetHeight; ctx.fillStyle = '#cfbca2'; ctx.fillRect(0, 0, canvas.width, canvas.height); ctx.fillStyle = '#bda88d'; for(let i=0; i<200; i++){ ctx.fillRect(Math.random()*canvas.width, Math.random()*canvas.height, 1.5, 1.5); } 
+        scratchInitialized = true;
+    }
     setTimeout(initCanvas, 600); window.addEventListener('resize', initCanvas);
     function scratch(e) { if (!isDrawing) return; hint.style.opacity = 0; const rect = canvas.getBoundingClientRect(); let x, y; if (e.type.includes('touch')) { x = e.touches[0].clientX - rect.left; y = e.touches[0].clientY - rect.top; } else { x = e.clientX - rect.left; y = e.clientY - rect.top; } ctx.globalCompositeOperation = 'destination-out'; ctx.beginPath(); ctx.arc(x, y, 40, 0, Math.PI * 2); ctx.fill(); }
-    canvas.addEventListener('mousedown', () => isDrawing = true); canvas.addEventListener('mouseup', () => isDrawing = false); canvas.addEventListener('mousemove', scratch); canvas.addEventListener('touchstart', (e) => { isDrawing = true; scratch(e); }); canvas.addEventListener('touchend', () => isDrawing = false); canvas.addEventListener('touchmove', scratch);
+    canvas.addEventListener('mousedown', () => isDrawing = true); canvas.addEventListener('mouseup', () => isDrawing = false); canvas.addEventListener('mousemove', scratch); canvas.addEventListener('touchstart', (e) => { isDrawing = true; scratch(e); }, {passive: true}); canvas.addEventListener('touchend', () => isDrawing = false); canvas.addEventListener('touchmove', scratch, {passive: true});
 
     const flipCards = document.querySelectorAll('.flip-card');
     const focusOverlay = document.getElementById('focus-overlay');
